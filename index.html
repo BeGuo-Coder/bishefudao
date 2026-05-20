@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>计算机毕设辅导｜博士一对一</title>
+  <style>
+    :root {
+      --bg: #f6f1e8;
+      --bg-soft: #fbf7ef;
+      --card: #fffaf2;
+      --ink: #201a17;
+      --muted: #6f6258;
+      --line: #e6d8c7;
+      --accent: #d97757;
+      --accent-dark: #9f4b36;
+      --accent-soft: #f3d7c9;
+      --green: #52614a;
+      --shadow: 0 24px 80px rgba(48, 35, 25, 0.10);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: ui-serif, Georgia, "Times New Roman", "Songti SC", "SimSun", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 8%, rgba(217, 119, 87, 0.16), transparent 28%),
+        radial-gradient(circle at 90% 12%, rgba(82, 97, 74, 0.10), transparent 24%),
+        linear-gradient(180deg, #fbf7ef 0%, var(--bg) 42%, #efe5d7 100%);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 0 34px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--ink);
+      color: var(--bg-soft);
+      font-size: 15px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 650;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: 34px;
+      align-items: stretch;
+      padding: 52px;
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      background: rgba(255, 250, 242, 0.72);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      right: -220px;
+      top: -260px;
+      background: rgba(217, 119, 87, 0.16);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 8px 14px;
+      border: 1px solid rgba(217, 119, 87, 0.32);
+      border-radius: 999px;
+      background: rgba(243, 215, 201, 0.55);
+      color: var(--accent-dark);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-weight: 800;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 7vw, 82px);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+      max-width: 760px;
+      margin-bottom: 24px;
+    }
+
+    .hero-lead {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--muted);
+      font-size: clamp(17px, 2vw, 21px);
+      line-height: 1.85;
+      max-width: 720px;
+      margin-bottom: 30px;
+    }
+
+    .hero-lead strong {
+      color: var(--ink);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+      margin-bottom: 30px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    .btn {
+      min-height: 48px;
+      padding: 0 22px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-weight: 850;
+      border: 1px solid transparent;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn.primary {
+      background: var(--ink);
+      color: var(--bg-soft);
+      box-shadow: 0 16px 32px rgba(32, 26, 23, 0.18);
+    }
+
+    .btn.secondary {
+      background: rgba(255, 250, 242, 0.76);
+      color: var(--ink);
+      border-color: var(--line);
+    }
+
+    .trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    .trust-row span {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.54);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .hero-panel {
+      position: relative;
+      padding: 28px;
+      border-radius: 28px;
+      background: var(--ink);
+      color: var(--bg-soft);
+      min-height: 100%;
+      overflow: hidden;
+    }
+
+    .hero-panel::after {
+      content: "</>";
+      position: absolute;
+      right: -26px;
+      bottom: -22px;
+      color: rgba(246, 241, 232, 0.09);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 132px;
+      font-weight: 900;
+      letter-spacing: -0.1em;
+    }
+
+    .panel-kicker {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: #e9c9ba;
+      font-weight: 850;
+      margin-bottom: 16px;
+    }
+
+    .quote {
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.18;
+      letter-spacing: -0.04em;
+      margin-bottom: 28px;
+    }
+
+    .mini-list {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 12px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    .mini-list div {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 13px 14px;
+      border-radius: 18px;
+      background: rgba(255, 250, 242, 0.08);
+      color: rgba(255, 250, 242, 0.88);
+      line-height: 1.55;
+    }
+
+    .mini-list b {
+      color: #f3d7c9;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .stat {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(255, 250, 242, 0.76);
+      box-shadow: 0 14px 42px rgba(48, 35, 25, 0.06);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: clamp(28px, 5vw, 48px);
+      line-height: 1;
+      color: var(--accent-dark);
+      letter-spacing: -0.05em;
+      margin-bottom: 8px;
+    }
+
+    .stat span {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--muted);
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
+    .danmaku-section {
+      margin-top: 24px;
+      position: relative;
+      padding: 28px 0;
+      border-top: 1px solid rgba(230, 216, 199, 0.72);
+      border-bottom: 1px solid rgba(230, 216, 199, 0.72);
+      overflow: hidden;
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+
+    .danmaku-title {
+      text-align: center;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+    }
+
+    .danmaku-track {
+      display: flex;
+      width: max-content;
+      gap: 12px;
+      margin: 10px 0;
+      animation: scroll-left 32s linear infinite;
+    }
+
+    .danmaku-track.reverse {
+      animation: scroll-right 36s linear infinite;
+    }
+
+    .danmaku-pill {
+      flex: 0 0 auto;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255, 250, 242, 0.86);
+      border: 1px solid var(--line);
+      color: #3a2d27;
+      box-shadow: 0 10px 24px rgba(48, 35, 25, 0.07);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 15px;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    .danmaku-pill.hot {
+      background: rgba(243, 215, 201, 0.74);
+      color: var(--accent-dark);
+      border-color: rgba(217, 119, 87, 0.24);
+    }
+
+    @keyframes scroll-left {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    @keyframes scroll-right {
+      from { transform: translateX(-50%); }
+      to { transform: translateX(0); }
+    }
+
+    .section {
+      margin-top: 24px;
+      padding: 34px;
+      border-radius: 30px;
+      border: 1px solid var(--line);
+      background: rgba(255, 250, 242, 0.74);
+      box-shadow: 0 14px 48px rgba(48, 35, 25, 0.065);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .section h2 {
+      font-size: clamp(30px, 4.2vw, 52px);
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+    }
+
+    .section-head p {
+      max-width: 420px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-weight: 650;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(255, 250, 242, 0.82);
+    }
+
+    .card.emphasis {
+      background: #2a211d;
+      color: var(--bg-soft);
+      border-color: rgba(42, 33, 29, 0.72);
+    }
+
+    .icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-weight: 900;
+    }
+
+    .card.emphasis .icon {
+      background: rgba(217, 119, 87, 0.22);
+      color: #f5c4b0;
+    }
+
+    .card h3 {
+      font-size: 25px;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      margin-bottom: 10px;
+    }
+
+    .card p,
+    .card li {
+      color: var(--muted);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
+      font-weight: 620;
+    }
+
+    .card.emphasis p,
+    .card.emphasis li {
+      color: rgba(255, 250, 242, 0.77);
+    }
+
+    .pain-list {
+      list-style: none;
+      display: grid;
+      gap: 11px;
+    }
+
+    .pain-list li {
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .pain-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .service-flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .flow-card {
+      position: relative;
+      padding: 24px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: rgba(255, 250, 242, 0.82);
+      min-height: 170px;
+    }
+
+    .flow-card b {
+      display: block;
+      margin-bottom: 18px;
+      color: var(--accent-dark);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-weight: 950;
+      letter-spacing: 0.08em;
+    }
+
+    .flow-card h3 {
+      font-size: 23px;
+      margin-bottom: 8px;
+    }
+
+    .flow-card p {
+      color: var(--muted);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.7;
+      font-weight: 620;
+    }
+
+    .price-card {
+      position: relative;
+      min-height: 270px;
+      overflow: hidden;
+    }
+
+    .price-card::after {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      right: -78px;
+      top: -84px;
+      border-radius: 50%;
+      background: rgba(217, 119, 87, 0.16);
+    }
+
+    .price {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      margin: 26px 0 10px;
+      color: var(--accent-dark);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-weight: 950;
+      letter-spacing: -0.055em;
+      font-size: clamp(58px, 8vw, 86px);
+      line-height: 0.92;
+    }
+
+    .price small {
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+
+    .tag {
+      display: inline-flex;
+      width: fit-content;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(217, 119, 87, 0.12);
+      color: var(--accent-dark);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-weight: 850;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    .notice {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(243, 215, 201, 0.42);
+      border: 1px solid rgba(217, 119, 87, 0.23);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    .gift-section {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 85% 12%, rgba(217, 119, 87, 0.18), transparent 28%),
+        linear-gradient(135deg, rgba(42, 33, 29, 0.98), rgba(66, 45, 37, 0.96));
+      color: var(--bg-soft);
+    }
+
+    .gift-section::after {
+      content: "FREE";
+      position: absolute;
+      right: -18px;
+      bottom: -28px;
+      color: rgba(255, 250, 242, 0.055);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 128px;
+      font-weight: 950;
+      letter-spacing: -0.08em;
+      pointer-events: none;
+    }
+
+    .gift-section .section-head p,
+    .gift-section .card p,
+    .gift-section .card li {
+      color: rgba(255, 250, 242, 0.74);
+    }
+
+    .gift-section .tag {
+      background: rgba(243, 215, 201, 0.16);
+      color: #f3d7c9;
+      border: 1px solid rgba(243, 215, 201, 0.18);
+    }
+
+    .gift-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.05fr 1.35fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .gift-main {
+      padding: 28px;
+      border-radius: 26px;
+      background: rgba(255, 250, 242, 0.08);
+      border: 1px solid rgba(255, 250, 242, 0.14);
+    }
+
+    .gift-main h3 {
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+      margin: 14px 0 16px;
+    }
+
+    .gift-main p {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: rgba(255, 250, 242, 0.78);
+      line-height: 1.8;
+      font-weight: 650;
+    }
+
+    .gift-cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .gift-card {
+      padding: 20px;
+      border-radius: 22px;
+      background: rgba(255, 250, 242, 0.10);
+      border: 1px solid rgba(255, 250, 242, 0.14);
+      min-height: 180px;
+    }
+
+    .gift-card .gift-icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(217, 119, 87, 0.24);
+      color: #f3d7c9;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-weight: 950;
+      margin-bottom: 14px;
+    }
+
+    .gift-card h4 {
+      font-size: 21px;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .gift-card p {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 14px;
+      line-height: 1.7;
+      font-weight: 620;
+      color: rgba(255, 250, 242, 0.72);
+    }
+
+    .gift-steps {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .gift-step {
+      padding: 15px 16px;
+      border-radius: 18px;
+      background: rgba(255, 250, 242, 0.08);
+      border: 1px solid rgba(255, 250, 242, 0.12);
+      color: rgba(255, 250, 242, 0.82);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-weight: 750;
+      line-height: 1.55;
+    }
+
+    .gift-step b {
+      display: block;
+      color: #f3d7c9;
+      margin-bottom: 4px;
+      letter-spacing: 0.04em;
+    }
+
+    .notice-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      color: #fffaf2;
+      font-weight: 950;
+      font-size: 22px;
+    }
+
+    .notice strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--ink);
+      font-size: 18px;
+    }
+
+    .notice p {
+      color: var(--muted);
+      line-height: 1.7;
+      font-weight: 680;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      counter-reset: step;
+    }
+
+    .step {
+      padding: 24px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: #fffaf2;
+      counter-increment: step;
+    }
+
+    .step::before {
+      content: "0" counter(step);
+      display: inline-flex;
+      margin-bottom: 22px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--accent-dark);
+      font-weight: 950;
+      letter-spacing: 0.08em;
+    }
+
+    .step h3 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .step strong {
+      color: var(--accent-dark);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 34px;
+    }
+
+    .comparison {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: #fffaf2;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 18px 20px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      line-height: 1.6;
+      font-weight: 650;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    th {
+      color: var(--ink);
+      background: rgba(243, 215, 201, 0.36);
+      font-weight: 900;
+    }
+
+    td:last-child,
+    th:last-child {
+      color: var(--accent-dark);
+      font-weight: 850;
+    }
+
+    .footer {
+      margin-top: 24px;
+      padding: 34px;
+      border-radius: 30px;
+      background: var(--ink);
+      color: var(--bg-soft);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      box-shadow: var(--shadow);
+    }
+
+    .footer h2 {
+      font-size: clamp(30px, 4.6vw, 56px);
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+      margin-bottom: 10px;
+    }
+
+    .footer p {
+      max-width: 720px;
+      color: rgba(255, 250, 242, 0.76);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.8;
+      font-weight: 620;
+    }
+
+    .footer .btn {
+      background: var(--accent);
+      color: #fffaf2;
+      border-color: rgba(255, 255, 255, 0.08);
+      white-space: nowrap;
+    }
+
+    .contact-cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    .contact-card {
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: rgba(255, 250, 242, 0.08);
+      border: 1px solid rgba(255, 250, 242, 0.14);
+    }
+
+    .contact-card span {
+      display: block;
+      color: rgba(255, 250, 242, 0.62);
+      font-size: 14px;
+      font-weight: 750;
+      margin-bottom: 6px;
+    }
+
+    .contact-card strong {
+      display: block;
+      color: #fffaf2;
+      font-size: clamp(22px, 3vw, 30px);
+      letter-spacing: -0.02em;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .danmaku-track,
+      .danmaku-track.reverse {
+        animation: none;
+        transform: translateX(0);
+        flex-wrap: wrap;
+        width: auto;
+      }
+    }
+
+    @media (max-width: 920px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero,
+      .footer {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 34px 24px;
+      }
+
+      .section {
+        padding: 24px;
+      }
+
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .grid-3,
+      .grid-2,
+      .steps,
+      .stats,
+      .service-flow,
+      .gift-grid,
+      .gift-cards,
+      .gift-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison {
+        overflow-x: auto;
+      }
+
+      table {
+        min-width: 680px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .page {
+        width: min(100% - 24px, 1180px);
+      }
+
+      .hero,
+      .section,
+      .footer {
+        border-radius: 24px;
+      }
+
+      .hero-panel,
+      .card,
+      .step,
+      .notice,
+      .flow-card,
+      .gift-main,
+      .gift-card {
+        border-radius: 20px;
+      }
+
+      .quote {
+        font-size: 29px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="nav" aria-label="页面导航">
+      <div class="brand">
+        <div class="brand-mark">CS</div>
+        <span>博士毕设辅导</span>
+      </div>
+      <div class="nav-links">
+        <a href="#pain">客户痛点</a>
+        <a href="#advantages">我们的优势</a>
+        <a href="#pricing">价格方案</a>
+        <a href="#gift">赠送资料</a>
+        <a href="#process">付款流程</a>
+        <a href="#contact">联系我</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div>
+        <div class="eyebrow">博士辅导 · 个人接单 · 无中间商赚差价</div>
+        <h1>计算机毕设不会做？先把题目变成可落地方案。</h1>
+        <p class="hero-lead">
+          面向本科、专科、成人本科、留学生与研究生的计算机毕设辅导。
+          特别适合<strong>基础薄弱、只有题目、不知道怎么做系统</strong>的同学。
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="#pricing">查看价格方案</a>
+          <a class="btn secondary" href="#gift">领取赠送资料</a>
+          <a class="btn secondary" href="#contact">咨询我的题目能不能做</a>
+        </div>
+        <div class="trust-row">
+          <span>2022–2026 持续辅导</span>
+          <span>近 100+ 同学经验</span>
+          <span>高学历背书</span>
+          <span>本人直接沟通</span>
+          <span>分阶段付款</span>
+        </div>
+      </div>
+
+      <aside class="hero-panel" aria-label="核心承诺">
+        <div class="panel-kicker">给基础弱同学的毕设辅导</div>
+        <div class="quote">不只是做系统，更帮你把软件、论文和答辩逻辑讲清楚。</div>
+        <div class="mini-list">
+          <div><b>01</b><span>只有题目也可以：先分析方向，再拆功能模块。</span></div>
+          <div><b>02</b><span>代码基础弱也能沟通：用能听懂的方式讲设计思路。</span></div>
+          <div><b>03</b><span>不走中介转包：本人接单，价格和边界提前说清。</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="stats" aria-label="服务经验数据">
+      <article class="stat">
+        <strong>2022</strong>
+        <span>开始辅导计算机相关毕设项目</span>
+      </article>
+      <article class="stat">
+        <strong>2026</strong>
+        <span>持续服务不同学历层次同学</span>
+      </article>
+      <article class="stat">
+        <strong>100+</strong>
+        <span>累计辅导近百名以上同学</span>
+      </article>
+      <article class="stat">
+        <strong>1v1</strong>
+        <span>个人接单，需求直接沟通</span>
+      </article>
+    </section>
+
+    <section class="danmaku-section" aria-label="客户常见痛点弹幕">
+      <div class="danmaku-title">他们来咨询时，通常卡在这些问题上</div>
+      <div class="danmaku-track">
+        <span class="danmaku-pill hot">老师让我做个系统，但我不会</span>
+        <span class="danmaku-pill">我只有题目，什么都没有</span>
+        <span class="danmaku-pill">代码基础很差，不知道怎么开始</span>
+        <span class="danmaku-pill hot">论文和系统怎么对应？</span>
+        <span class="danmaku-pill">数据库不会设计</span>
+        <span class="danmaku-pill">前后端怎么连起来？</span>
+        <span class="danmaku-pill hot">快截止了，来不及了</span>
+        <span class="danmaku-pill">老师反馈了，但我不知道怎么改</span>
+        <span class="danmaku-pill hot">怕找中介被转包</span>
+        <span class="danmaku-pill">答辩不知道怎么讲</span>
+        <span class="danmaku-pill hot">老师让我做个系统，但我不会</span>
+        <span class="danmaku-pill">我只有题目，什么都没有</span>
+        <span class="danmaku-pill">代码基础很差，不知道怎么开始</span>
+        <span class="danmaku-pill hot">论文和系统怎么对应？</span>
+        <span class="danmaku-pill">数据库不会设计</span>
+        <span class="danmaku-pill">前后端怎么连起来？</span>
+        <span class="danmaku-pill hot">快截止了，来不及了</span>
+        <span class="danmaku-pill">老师反馈了，但我不知道怎么改</span>
+        <span class="danmaku-pill hot">怕找中介被转包</span>
+        <span class="danmaku-pill">答辩不知道怎么讲</span>
+      </div>
+      <div class="danmaku-track reverse">
+        <span class="danmaku-pill">选题有了，功能不会拆</span>
+        <span class="danmaku-pill hot">系统能不能做出来我没底</span>
+        <span class="danmaku-pill">文章结构不知道怎么写</span>
+        <span class="danmaku-pill">不会写需求分析</span>
+        <span class="danmaku-pill hot">不想被中介坑</span>
+        <span class="danmaku-pill">想找个靠谱的人带一下</span>
+        <span class="danmaku-pill hot">基础太弱，自己摸索太慢</span>
+        <span class="danmaku-pill">导师要求改功能</span>
+        <span class="danmaku-pill">留学生项目要求不太一样</span>
+        <span class="danmaku-pill hot">研究生项目能不能单独评估？</span>
+        <span class="danmaku-pill">选题有了，功能不会拆</span>
+        <span class="danmaku-pill hot">系统能不能做出来我没底</span>
+        <span class="danmaku-pill">文章结构不知道怎么写</span>
+        <span class="danmaku-pill">不会写需求分析</span>
+        <span class="danmaku-pill hot">不想被中介坑</span>
+        <span class="danmaku-pill">想找个靠谱的人带一下</span>
+        <span class="danmaku-pill hot">基础太弱，自己摸索太慢</span>
+        <span class="danmaku-pill">导师要求改功能</span>
+        <span class="danmaku-pill">留学生项目要求不太一样</span>
+        <span class="danmaku-pill hot">研究生项目能不能单独评估？</span>
+      </div>
+    </section>
+
+    <section class="section" id="pain">
+      <div class="section-head">
+        <h2>你可能不是不努力，是真的卡在第一步。</h2>
+        <p>很多同学来咨询时，不是只缺代码，而是缺一条从题目到系统、从系统到文章的完整主线。</p>
+      </div>
+      <div class="grid-3">
+        <article class="card">
+          <div class="icon">?</div>
+          <h3>只有题目，没有方案</h3>
+          <p>老师让做一个系统，但不知道该做哪些功能、用什么技术、怎么展开。</p>
+        </article>
+        <article class="card">
+          <div class="icon">{}</div>
+          <h3>基础薄弱，代码不会</h3>
+          <p>前端、后端、数据库都不熟，网上教程看很多，还是不知道怎么整合。</p>
+        </article>
+        <article class="card">
+          <div class="icon">↔</div>
+          <h3>软件和文章对不上</h3>
+          <p>系统能不能跑是一回事，论文怎么写、答辩怎么讲，又是另一回事。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="advantages">
+      <div class="section-head">
+        <h2>为什么选择个人博士辅导？</h2>
+        <p>客户真正想要的是专业靠谱、高学历背书、不坑人。我们把这三件事写在服务里。</p>
+      </div>
+      <div class="grid-3">
+        <article class="card emphasis">
+          <div class="icon">博</div>
+          <h3>博士辅导</h3>
+          <p>更懂系统设计、文章逻辑和答辩表达，帮助你把“做什么、怎么做、为什么这么做”讲清楚。</p>
+        </article>
+        <article class="card emphasis">
+          <div class="icon">1v1</div>
+          <h3>个人接单</h3>
+          <p>本人直接沟通，不经过客服和中介转述，需求理解更准确，修改反馈更高效。</p>
+        </article>
+        <article class="card emphasis">
+          <div class="icon">￥</div>
+          <h3>无中间商赚差价</h3>
+          <p>不层层转包，价格透明，服务内容提前说清楚，费用花在真正的辅导交付上。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>我们能帮你解决什么？</h2>
+        <p>从“我只有题目”到“系统、论文、答辩有一条清晰主线”。</p>
+      </div>
+      <div class="service-flow">
+        <article class="flow-card">
+          <b>STEP 01</b>
+          <h3>看题目</h3>
+          <p>先判断题目能做成什么系统，避免一开始方向就跑偏。</p>
+        </article>
+        <article class="flow-card">
+          <b>STEP 02</b>
+          <h3>拆功能</h3>
+          <p>把系统拆成用户、模块、页面、数据库和核心流程。</p>
+        </article>
+        <article class="flow-card">
+          <b>STEP 03</b>
+          <h3>理文章</h3>
+          <p>让软件设计和论文结构对应起来，减少后期返工。</p>
+        </article>
+        <article class="flow-card">
+          <b>STEP 04</b>
+          <h3>讲答辩</h3>
+          <p>梳理系统亮点和实现逻辑，让你知道该怎么讲清楚。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>适合这些同学先沟通。</h2>
+        <p>本科、专科、成人本科、留学生、研究生都可以先发题目评估。</p>
+      </div>
+      <div class="grid-2">
+        <article class="card">
+          <h3>基础比较弱</h3>
+          <ul class="pain-list">
+            <li>代码基本不会，或者只会一点点</li>
+            <li>不知道前后端和数据库怎么组合</li>
+            <li>看教程看不懂，自己摸索效率低</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>项目没有主线</h3>
+          <ul class="pain-list">
+            <li>只有题目，不知道系统怎么落地</li>
+            <li>软件、论文、答辩内容串不起来</li>
+            <li>导师反馈后不知道该怎么调整</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="pricing">
+      <div class="section-head">
+        <h2>价格方案</h2>
+        <p>明码标价，先说清楚服务范围；研究生项目根据需求复杂度单独沟通。</p>
+      </div>
+      <div class="grid-2">
+        <article class="card price-card">
+          <span class="tag">本科 / 专科常规毕设</span>
+          <h3>软件设计辅导</h3>
+          <p>适合已有文章计划，主要需要系统设计、功能模块和实现思路辅导的同学。</p>
+          <div class="price"><small>¥</small>1000</div>
+          <p>包含基础需求沟通、软件设计思路和交付后 3 次修改。</p>
+        </article>
+        <article class="card price-card">
+          <span class="tag">本科 / 专科常规毕设</span>
+          <h3>软件设计 + 文章辅导</h3>
+          <p>适合系统和文章都需要同步梳理的同学，减少“系统做了但论文写不出来”。</p>
+          <div class="price"><small>¥</small>1500</div>
+          <p>覆盖软件设计、文章思路梳理与交付后 3 次修改。</p>
+        </article>
+      </div>
+      <div class="notice">
+        <div class="notice-icon">i</div>
+        <div>
+          <strong>以上价格主要适用于本科、专科毕设辅导</strong>
+          <p>研究生项目：根据具体需求、难度与周期，一项目一议。成人本科、留学生等需求也可先沟通题目和学校要求。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section gift-section" id="gift">
+      <div class="section-head">
+        <div>
+          <span class="tag">限时赠送资料包</span>
+          <h2>公开分享 3 天，可领取毕业设计资料包。</h2>
+        </div>
+        <p>适合发小红书、校园墙或朋友圈扩散。公开满 3 天后，可凭截图领取常见问题与答辩资料。</p>
+      </div>
+      <div class="gift-grid">
+        <article class="gift-main">
+          <span class="tag">领取条件</span>
+          <h3>发小红书 / 校园墙公开 3 天后领取</h3>
+          <p>将本服务信息发布到小红书、校园墙等公开平台，保持公开展示满 3 天，即可领取配套资料包。内容可用于提前了解项目沟通、老师常问问题、系统说明书和答辩展示思路。</p>
+        </article>
+        <div class="gift-cards">
+          <article class="gift-card">
+            <div class="gift-icon">Q</div>
+            <h4>《项目定制·毕设常见问题》</h4>
+            <p>整理沟通前高频问题，帮助你提前想清楚题目、功能、周期、修改和交付边界。</p>
+          </article>
+          <article class="gift-card">
+            <div class="gift-icon">书</div>
+            <h4>《系统说明书》</h4>
+            <p>辅助理解系统功能、模块结构和使用流程，方便后续整理文章和答辩表达。</p>
+          </article>
+          <article class="gift-card">
+            <div class="gift-icon">PPT</div>
+            <h4>博士都在用的答辩 PPT 模板</h4>
+            <p>包含答辩常用结构和展示逻辑，让系统介绍、研究背景、功能演示更清楚。</p>
+          </article>
+        </div>
+      </div>
+      <div class="gift-steps">
+        <div class="gift-step"><b>01 发布</b>发小红书 / 校园墙 / 公开平台</div>
+        <div class="gift-step"><b>02 保留</b>公开展示满 3 天</div>
+        <div class="gift-step"><b>03 领取</b>发送截图领取资料包</div>
+      </div>
+    </section>
+
+    <section class="section" id="process">
+      <div class="section-head">
+        <h2>付款方式</h2>
+        <p>分阶段付款，降低一次性付款压力，也让合作过程更安心。</p>
+      </div>
+      <div class="steps">
+        <article class="step">
+          <h3>定金</h3>
+          <strong>30%</strong>
+          <p>确认需求和方案后开始推进。</p>
+        </article>
+        <article class="step">
+          <h3>完成后</h3>
+          <strong>60%</strong>
+          <p>阶段完成后支付主要款项。</p>
+        </article>
+        <article class="step">
+          <h3>最终交付后</h3>
+          <strong>10%</strong>
+          <p>交付确认后支付尾款。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>和普通中介有什么不同？</h2>
+        <p>毕设辅导最怕沟通断层、需求转述和后期扯皮，所以我们把“直接、透明、负责”放在第一位。</p>
+      </div>
+      <div class="comparison">
+        <table>
+          <thead>
+            <tr>
+              <th>对比项</th>
+              <th>普通中介</th>
+              <th>我们</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>沟通方式</td>
+              <td>客服转述，容易误解</td>
+              <td>本人一对一直接沟通</td>
+            </tr>
+            <tr>
+              <td>价格结构</td>
+              <td>可能包含中间差价</td>
+              <td>无中间商赚差价，价格透明</td>
+            </tr>
+            <tr>
+              <td>专业背书</td>
+              <td>水平不稳定</td>
+              <td>博士辅导，逻辑更清晰</td>
+            </tr>
+            <tr>
+              <td>付款方式</td>
+              <td>可能要求一次性付款</td>
+              <td>30% / 60% / 10% 分阶段付款</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>服务说明</h2>
+        <p>提前说清楚边界，合作会更顺畅。</p>
+      </div>
+      <div class="grid-2">
+        <article class="card">
+          <h3>包含 3 次修改</h3>
+          <p>交付后可根据反馈进行 3 次内容修改，适合常规优化和细节调整。</p>
+        </article>
+        <article class="card">
+          <h3>不含格式调整</h3>
+          <p>不包含学校模板排版、目录格式、页眉页脚等纯格式类调整。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="footer" id="contact">
+      <div>
+        <h2>只有题目也可以先沟通。</h2>
+        <p>可以先说明学历层次、专业方向、毕设题目、学校要求和截止时间，我会帮你判断适合的软件方案与辅导范围。</p>
+        <div class="contact-cards">
+          <div class="contact-card">
+            <span>微信咨询</span>
+            <strong>hjr2666888</strong>
+          </div>
+          <div class="contact-card">
+            <span>QQ 咨询</span>
+            <strong>2826300000</strong>
+          </div>
+        </div>
+      </div>
+      <a href="#pricing" class="btn">查看价格</a>
+    </section>
+  </main>
+</body>
+</html>
